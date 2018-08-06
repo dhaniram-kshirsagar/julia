@@ -230,7 +230,7 @@ end
         redirect_stderr(oldstderr)
         close(newstderr[2])
     end
-    Base._wait(t)
+    Base.wait(t)
     @test run[] == 3
     @test fetch(errstream) == """
         error in running finalizer: ErrorException("task switch not allowed from inside gc finalizer")
@@ -268,7 +268,7 @@ end
     testerr = ErrorException("expected")
     @async Base.throwto(t, testerr)
     @test try
-        Base._wait(t)
+        Base.wait(t)
         false
     catch ex
         ex
